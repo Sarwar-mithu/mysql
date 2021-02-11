@@ -1,0 +1,664 @@
+setup:
+      i- 1st mysql download kore nibo
+      ii- 2nd je drive rakbo sei drive download kora file neye jabo
+      iii-3rd CMD mode on korbo & je drive rakce sei drive CMD mode nibo      [back = cd \n , enter = cd drive_name,   cd bin,]
+      iv- nicher step ai gulo flow korbo,   [1,2 step ekta cmd mode ,  3 no ta aro ekta cmd mode on kore nibo]
+
+
+		mysql
+
+01.Initialize the database. create a root user without password 
+mysqld --initialize --console
+
+02. Start the Mysql database servet
+mysqld --console
+
+03.Start a client as superuser "root"
+ mysql -u root -p
+
+04. password is generated for root@localhost: ollv3YL)lsdj
+alter user 'root'@'localhost' identified by 'sarwarmithu';
+
+05. mysql -u root -p
+      password = sarwarmithu
+
+                                                     [{( CHAPTER-01 )}]
+
+CREATE DATABASE
+1.CREATE DATABASE database_name;
+2.USE database_name;
+
+                                     .CREATE TABLE
+
+3.CREATE TABLE table_name
+(
+Column_name1 data_type (size),
+Column_name2 data_type (size),
+Column_name3 data_type (size)
+);     [sideNote:- varchar, int]
+
+KEY:
+         syntex:-CREATE TABLE table_name
+                       (
+                       Name varchar(30),
+                       Roll integer (5),
+                       Mobile_no integer (10) NOT NULL    [not null likle oi column data dite hobe]
+                       );
+
+UNIQUE KEY:
+          syntex:-CREATE TABLE table_name
+                       (
+                       Name varchar(30),
+                       Roll integer (5),
+                       Mobile_no integer (10) UNIQUE KEY    [ekai column e same kichu hote parbe na. {onake gulo column use korthe parbo}]
+                       );
+
+PRIMARY KEY:
+          syntex:-CREATE TABLE table_name
+                       (
+                       Name varchar(30),
+                       Roll integer (5) NOT NULL,
+                       Mobile_no integer (10),
+                       PRIMARY KEW(Roll)      [primary key chile ekti table onake gulo column e use kora jabe]
+                       );
+
+		AUTO INCREMENT
+
+AUTO_INCREMENT:          [sodhu ekti table ekti column keai auto_increment kora jabe]   
+          syntex:- CREATE TABLE table_name
+                         (
+                         column_name int NOT NULL AUTO_INCREMENT,    [1 por 2 hobe, 2 por 3 hobe. ai vabhe ++hotei thakbe]
+                         column_name1 varchar (size) NOT NULL,
+                         column_name2 varchar (size),
+                         PRIMARY KEY (column_name)
+                         );
+     [insert into korar shomoy auto_increment r column_name likha lagbe na]
+  
+   0r:- ALTER TABLE column_name AUTO_INCREMENT = 10      [user increment koto theke shuru korthe cai] 
+         [data insert kora shuru kore dibo]
+
+
+4.DESC table_name;   [used to describe your table]  
+5.SHOW DATABASES;    [database sodhu dekbo]
+6.SHOW TABLES;         [sodhu table dekbo]
+    i:- SHOW INDEX FROM table_name;      [constraint = primary key, unique key, not null]
+    ii:-SHOW COLUMNS FROM table_name;
+    iii:-SHOW CREATE DATABASE table_name; [database ki vabhe lekha hoyce ta dekabe]
+    iv:-SHOW CREATE TABLE table_name;
+
+7.Data Type:-
+     ->INT : syntex:- column_name int (size);    [roll int(6);]
+     ->DEC: syntex:- column_name DECIMAL(size,p);  [price decimal(4,2);]
+     ->CHAR : syntex :- column_name CHAR(20);    [name char (20);]
+     ->VARCHAR :syntex :- column_name VARCHAR(size);  [name VARCHAR (50);]
+     ->TEXT : syntex :-column_name TEXT;    [address text]
+     ->DATE : syntex :-column_name DATE;   [age date], yyyy-mm--dd format
+     ->DATETIME : syntex :-column_name DATETIME;  [date_of_tome DATETIME;], yyyy-mm-dd hh:mm:ss
+     ->TIMESTAMP: syntex :- column_name TIMESTAMP; [current time bole dibe]
+ 
+8. HELP : help contents  [enter korar por onake gulo data dekabe {help Enter_User}]
+
+
+9.INSERT INTO :
+     syntex :- INSERT INTO table_name (column1, 'column2',column3,...........);
+                    ->values(value1,'value2',value3........);
+
+10.INSERT INTO:
+    ->Withot specifying column name
+     syntex:- INSERT INTO table name
+                 ->values(value1,'value2',value3,.......);
+
+11.INSERT INTO:
+     ->Insert data only in Specified columns
+        syntex:- INSERT INTO table_name(column1,column2)  [je gulor value nai sei gulo insert korbo na]
+                    ->values (value1,value2)
+
+12.INSERT INTO:
+      ->Insert multiple record at one time
+         syntex:- INSERT INTO table_name(column1,column2,column3)
+                    ->values (value1,value2,value3),
+                                   (valuee1,value2,value3);
+
+13.SELECT:
+         ->Select all columns from the table
+         syntex:- SELECT * FROM table_name;
+
+14.SELECT:                                               [table r jekono nidishto puro column dekha]
+       ->Select Particular columns from the table
+           syntex:- SELECT column_name1,column_name2,.....
+                          FROM table_name;
+
+15.SELECT with LIMIT:
+        ->syntex:- SELECT column_name,column_name2
+                          FROM  table_name
+                          LIMIT records_number;   [{1-10} ace kinthu ami {1-5} projonto dekte cai]   
+
+                      or, select *
+                            from table_name
+                            limit records_number,records_number;  [{1-10} dekbo limit 3,6 projonto dekbo] 
+ 
+16.Single Quotes Problem
+       ->INSERT INTO table_name(t_id, c_name, address)
+          values(12, 'K.K\'s Company', 'Dhaka') othoba values (12, 'K.K' 's Company', 'Dhaka')
+
+                                                         SEARCH FOR VALUE
+
+ 
+ 17. WHERE:           [Search korar jonno use kora hoy] [Operator {=, !=, >, <, >=, <=,AND,OR,NOT, BETWEEN, LIKE, IN}]
+           ->Specific data from all column
+              syntex:- SELECT*
+                             FROM table_name
+                             WHERE comumn_name Operator 'value';     [WHERE name = 'mithu';] 
+                                                                                                           [WHERE stu_id = 5;]    
+
+            or->Specific data from specific column
+                   syntex:- SELECT column_name
+                             FROM table_name
+                             WHERE column_name Operator 'value';   [WHERE name = 'mithu';] 
+18.NULL Value:
+         ->this is used to select only the records with NULL values in the column
+            syntex:- SELECT column_name
+                           FROM table_name
+                           WHERE column_name IS NULL;    or {is not null}
+
+19.AND:
+        ->If both the first condition AND the second condition are ture
+           suntex:- SELECT *
+                          FROM table_name
+                          WHERE column_name = 'value'     [{1st condition} where name = 'mithu']
+                          AND column = 'value';                      [{2nd conditon}  and stu_id =  value]
+        OR:- [je kono ekti condition true holei hobe]
+
+20. Combination of AND & OR:
+          ->syntex:- SELECT * FROM table_name
+                             WHERE column_name = 'value'
+                             AND(column_name = 'value' OR column_name1 = 'value);
+
+21. IN:                               [onake gulo value/text Search korar jonno use kora hoy]
+          ->the IN operator allows you to specify multiple values in a WHERE clause                  
+              syntex:- SELECT* FROM table_name
+                             WHERE colunm_name IN ('value1','value2',.....)     [NOT IN {sodhu not in likbo}]
+
+22.BETWEEN:                 [integer/text Search korar jonno use kora hoy]
+          ->the BETWEEN operator selects values within a range.the values can be numbers,txt,data
+             syntex:- SELECT * FROM table_name
+                            WHERE column_name BETWEEN value1 AND value2;   [TEXT= where column_name BETWEEN 'A' and 'G' {a-g moddhe joto gulo name ace ta dekabe}]
+
+
+23.BETWEEN date:      [date deye Search korar jonno use kora hoy]
+            ->syntext:- SELECT * FROM table_name
+                               WHERE column_name
+                               BETWEEN 'yyyy/mm/dd' AND 'yyyy/mm/dd';     [NOT BETWEEN]
+
+24.BETWEEN with IN:
+            ->syntex:- SELECT * FROM table_name
+                              WHERE (column_name BETWEEN value1 AND value2)
+                              AND column_name IN (value1,value2);    [AND NOT column_name IN(value1,value2)]
+      
+25.LIKE:   [not like]
+           ->the LIKE operator is used to search fro a specified pattern in a column
+               syntex:- SELECT*
+                              FROME table_name
+                              WHERE column_name LIKE 'pattern';     {pattern = %, _, [charlist], [^charlist] or [!charlist]}    
+       
+   ex:- % = zero or more characters (sarwarmithu, = 'sarw%',   '%mith',  '%ar%')
+          _ =  one single character (sarwarmithu = 'sarw_',  '_hu', 'w_r_i') 
+
+                                            ORDER BY
+
+26.ORDER BY:
+              ->short in descending order
+                 syntex:- SELECT * FROM table_name
+                                ORDER BY column_name DESC;
+
+              ->short in ascending order
+                  syntex:-SELECT * FROM table_name
+                                ORDER BY clolumn_name ASC;
+
+                                     
+
+27.ALIASES:-   [temporarily rename a table name or column name] 
+             FOR TABLE:
+                              ->syntex:- SELECT column_name FROM table_name AS alias_name;
+             FOR COLUMN:
+                              ->syntex:- SELECT column_name AS alias_name FROM table_name;
+
+                                          ARITHMETIC OPERATORS
+
+28. OPERATORS-> (*, /, +, -):
+             ->syntex:- SELECT column_name, column_name OPERATOR Value FORM table_name;
+                                [ex:- select stu_id, name , mark, mark+100 from student]
+                                [ex:- select stu_id, name, mark, stu_id+mark AS "new mark" form student]
+
+29.SELECT DISTINCT:
+                ->the select distinct statement is used to display only distinct(different)values.
+                    syntex:- SELECT DISTINCT column_name FROM table_name;    [same name ekbar dekabe]
+
+
+		    ALTER TABLE
+
+30.ALTER TABLE:                [constraint = primary key, unique key, not null,]
+             I  ->this command is used to ADD/CHANGE/MODIFY/DROP/(ENABLE/DISABLE constraints) existing structure of the table .
+             ADD COLUMN:
+                                  ->when  a new column is to be added to the table structure WITHOUT constraints
+                                   syntex:- ALTER TABLE table_name
+                                                  ADD COLUMN new_column_name datatype(size);    [last]
+
+	           or:-> add more than multiple column
+                                      syntex:- ALTER TABLE table_name
+                                                    ADD COLUMN new_column_name1 datatype(size),
+                                                    ADD COLUMN new_column_name2 datatype(size);
+
+             II- ADD COLUMN by POSITION:         [last, first,after]
+               FIRST:-              
+                                 syntex:- ALTER TABLE table_name
+                                               ADD COLUMN new_column_name datatype(size) FIRST;
+
+              AFTER:-
+                              syntex:- ALTER TABLE table_name
+                                             ADD COLUMN new_column_name datatype(size) AFTER current_column_name;
+
+
+
+III-(ADD COLUMN)->when a new column is to be added to the tables structure WITH constraints.    
+                                     syntex:- ALTER TABLE table_name
+                                                    ADD COLUMN new_column_name datatype(size) Constraint_name,    [constraint_name por must comma dite hobe]
+                                                    ADD constraint_name new_column_name;
+                              
+                                           ex:- ALTER TABLE table_name
+                                                   ADD COLUMN new_column_name INT NOT NULL AUTO_INCREMENT,
+                                                   ADD PRIMARY KEY(new_column_name);
+  
+                                          ex:- ALTER TABLE table_name
+                                                   ADD COLUMN new_column_name INT UNIQUE KEY AFTER current_culumn_name;         [first]
+
+ 31.CONVERT:           [record ekai name jano na hoy tai convert kore nite hoy]
+                 syntex:-   ALTER TABLE table_name
+                                  ADD CONSTRAINT UNIQUE KEY (New_column_name); 
+
+
+32.CHANGE COLUMN:
+                I ->this used to change name and data type of an existing column, WITHOUT Constraints.
+                    syntex:-ALTER TABLE table_name
+                                  CHANGE COLUMN old_column_name  New_column_name  New_datatype(size);  
+
+
+                  ->change more than multiple column
+                     syntex:-ALTER TABLE table_name
+                                  CHANGE COLUMN old_column_name1  New_column_name1   New_datatype(size),      
+                                  CHANGE COLUMN old_column_name2  New_column_name2   New_datatype(size); 
+         
+          II-CHANGE COLUMN with constraints  
+                   syntex:-ALTER TABLE table_name
+                                  CHANGE COLUMN old_column_name  New_column_name  New_datatype(size) Constraint_name,       [constraint_name por must comma dite hobe]
+                                  ADD constraint_name (new_column_name);  
+
+33.MODIYFY COLUMN:        [constrint kora jabe]
+                 syntex:- ALTER TABLE table_name
+                                MODIFY COLUMN column_name datatype(size)   [size neye kaj korbe]  
+
+
+
+
+
+                                           DROP COLUMN
+
+
+34. DROP COLUMN:
+                I->when a column in a table need to delete
+                syntex:-ALTER TABLE table_name
+                              DROP COLUMN column_name;
+
+               II->when removing CONSTRAINT from a column
+                syntex:- ALTER TABLE table_name
+                               DROP Constraint_name column_name;          [constraint = primary key, unique key, not null,]
+                     [index number bahir kore take delete kore nite hobe]
+
+35.DROP TABLE:
+             I-> this command is used to delete/remove table from the database.
+             syntex:-DROP TABLE table_name;
+
+36.TRUNCATE TABLE:
+            I->when we only want to delete the data inside the table, and not the table itself.
+            syntex:- TRUNCATE TABLE table_name;    [table delete hobe na sodhu table thaka record/data gulo delete hoye jabe]
+
+37.RENAME TABLE:
+          ->this command is used to rename one or more table
+          syntex:- RENAME TABLE old_table_name TO new_table_name;
+
+
+                                    ALTER DATABASE
+
+38.ALTER DATABASE:
+          ->syntex:- ALTER DATABASE database_name;
+
+     i->DROP DATABASE:
+                        ->the drop database statement is used to delete a databas
+                        syntex:- DROP DATABASE database_name;
+
+
+		RECORD/DATA UPDATE
+
+39.UPDATE:
+             I->the update satement is used to update existing records in a table
+             syntex:-UPDATE table_name
+                          SET column1 = value1, column2 = value2,......
+                          WHERE some_column = some _value;                [WHERE is necessary otherwise all records will be replace with given value]
+
+                       ex:- UPDATE table_name
+                              SET stu_name = 'Arju', salary = 35000
+                              WHERE stu_id = 101;            [prothome kaj korbe WHERE theke 101 er record change korbe. jodi where na likhi ta hole sobei change kore dibe, ja user cai na]
+
+                 
+            II->UPDATE with CASE
+                              syntex:- UPDATE table_name
+                                             SET new_column =                  [ar dara bujai je table nothun ekti column khula hoyce]
+                                             CASE 
+                                             WHEN column_name1 = some_value1 THEN new_value1
+                                             WHEN column_name2 = some_value2 THEN new_value2
+                                             ELSE new_value3
+                                             END;
+
+                              ex:-UPDATE table_name
+                                    SET result =
+                                    CASE
+                                    WHEN mark >= 80 THEN 'A+'
+                                    WHEN mark < 80 AND mark >=70 THEN 'A'
+                                    WHEN mark < 70 AND mark >=60 THEN 'B+'
+                                    ELSE 'Fail'
+                                    END;
+
+40.DELETE RECORD:
+             ->delete a specifie record
+              syntex:-DELETE FORM table_name
+                           WHERE some_column = some_value;    [where name = 'mithu']
+
+
+
+		COPY OLD TABLE TO NEW TABLE
+
+41.COPY:
+            i->within same database
+            syntex:- CREATE TABLE new_table LIKE old_table;
+                           INSERT new_table SELECT * FROM old_table;
+
+
+            ii->DATABASE:
+                        ->withen different database
+                        syntex:- CREATE TABLE new_table LIKE old_database.old_table;
+                                       INSERT new_table SELECT * FROM old_database.old_table;
+
+
+
+		            FUNCTION    
+
+42.  FUNCTION:
+             i:- SELECT MIN(column_name) FROM table_name - Smallest value of the selected column
+             ii:-SELECT MAX(column_name) FROM table_name - Largest value of the selected column.
+            iii:-SELECT SUM(column_name) FROM table_name - the total sum of a numeric column.
+            iv:-SELECT AVG(column_name) FROM table_name - The average value of a numeric column.
+            v:-SELECT SQRT(column_name FROM table_name - The square root of a numeric column
+           vi:-SELECT ROUND(column_name, decimal)FROM table_name  -The function is used to round a numeric field to the number of decimals specified.
+
+           vii:- COUNT:
+                      SELECT COUNT(column_name) FROM table_name;    [select count(*) from table_name] {null vlaue count korbe na}
+                      a->select COUNT(DISTINCT column_name) FROM table_name; [same lekha thakle ekbari count korbe,    (101,101,101 = 1)]
+                      b->select COUNT(column_name) FROM ORDERS
+                           WHERE column_name = 'value';        [ex:- value =101 koi bar lakha ace ta dekabe] 
+
+           viii:-UPPER/LOWER/MID/LENGTH, CASE:
+                      a-> SELECT UPPER(column_name) FROM table_name;
+                      b-> SELECT LOWER(column_name) FROM table_name;
+                      c-> SELECT LENGTH(column_name) FROM table_name;
+                      d-> SELECT  MID(column_name start, length) FROM table_name;
+
+
+          ix:-SELECT CONCAT(column_name1, column_name2,......) FROM table_name;   [it joints two column]
+          x: SELECT REVERSE(column_name) FROM table_name;   [it reverse the order of letter in string]
+          xi:- SELECT NOW( ) FROM table_name;    [function returns the current system date and time]
+          xii:- SELECT FROMAT(column_name, fromat_type) FROM table_name;   [function is used to format how a field is to be displayed]
+ 
+
+
+		       DECIMAL DATA TYPE
+
+ 
+43.  DECIMAL:-
+             syntex:-i:-column_name DECIMAL(T, D) ;  [T=total digit range(1-65),  D=digits after decimal(0-30)
+
+
+		
+                                            GROUP BY / HAVING
+        
+
+44.GROUP BY:       [ekai namer onake gulo record thakle oi gulo ke group by kore ]
+                a-> SELECT column_name, MIN(column_name)FROM table_name GROUP BY column_name;  
+                      ex:- SELECT name, MIN(salary) FROM  student GROUP BY name;
+
+               b-> HAVING:
+                           SELECT column_name1, COUNT(*) FROM table_name GROUP BY column_name1 HAVING COUN(*) >2          [(value)]
+                                  [group r moddhe ke ki korce ta dekabe]
+
+
+
+
+			[{(chapter -02)}]
+                                             RELATIONNSHIP BETWEEN TABLES
+
+45.RELATIONSHIP:
+                       a- > one to one    [housband -> wife]
+                       b- > one to many  [person -> order, -> product]
+                       c- > many to many  [person(book) -> writer(book1) ->writer(book2)]
+
+46.NORMALIZATION:
+                       a- > 1 NF
+                       b- > 2 NF
+                       c- > 3 NF
+
+47.FOREIGN KEY:
+                      -> a FOREIGN KEY in one table points to a PRIMARY KEY in another table
+                      syntex:-CREATE TABLE current_table_name
+                                    (
+                                    CONSTRAINT  create_current_column_name   [commma deoa jabe na]   
+                                    FOREIGN KEY (create_current_column_name) REFERENCES 1st_table_name(1st_table_column_name)
+                                     );
+
+                    ex: 1st table:
+                                       CREATE TABLE teacher                      [parent table]
+                                        (
+                                        serial  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                        name  VARCHAR(30),
+                                        address VARCHAR(30),
+                                        );
+
+                          2nd table:                                                               [chile table]
+                                         CREATE TABLE class
+                                        (
+                                        number  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                        subject  VARCHAR(30),
+                                        salary  DECIMAL(9,2),
+	                      student int not null,
+		    FROREIGN KEY(student) REFERENCES teacher(serial)
+                                        );
+
+    constraint name :-       SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS   [sob gulo key word,likha change kora jabe na]
+                                          WHERE TABLE_NAME = table_name;
+
+       			
+ 			FOREIGN KEY DROP
+
+                      DROP:
+                            i:- prothome uporer(constraint name) deye tar foreign key jene nibo ebong oi khane CONTRAINT_NAME je deoa thake delete korle delete hoye jabe
+                                  ex:- ALTER TABLE table_name
+                                         DROP FOREIGN KEY (constraint_name_je name deoa thakbe);
+
+                         ii:-  DROP TABLE  table_name;   [parent table ke age deye delete kora jabe na . prothome child table ke delete korbo]
+                         
+                         iii:-RECORD DELETE:                  [parent table ke age deye delete kora jabe na . prothome child table ke delete korbo
+                                          DELETE FROM table_name
+                                          WHERE column_name = value/text;
+
+                  ON DELETE:                [sora-sori foreign key ke delete kora jabe]
+                         i:-ON DELETE CASECADE:
+                                         syntex:-  CREATE TABLE class
+                                                         (
+                                                         number  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                         subject  VARCHAR(30),
+                                                         salary  DECIMAL(9,2),
+	                                      student int not null
+		                    FROREIGN KEY(student) REFERENCES teacher(serial)
+                                                        ON DELETE CASCADE              [create korar shomoy ai line ti likle, child class ke sora-sori delete kora jabe]
+                                                         );
+
+                                                delete: DELETE FROM teacher          [parent cls theke foreign key delete kore dile child cls automatic delete hoye jabe]
+                                                             WHERE column_name = 'value text/'; 
+                         
+                         ii:-ON DELETE  SET NULL:
+                                         syntex:- CREATE TABLE class
+                                                         (
+                                                         number  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                         subject  VARCHAR(30),
+                                                         salary  DECIMAL(9,2),
+	                                       student int                               [not null likha jabe na karon amra record ke delete kore deleo oi jagai null dekabe]
+		                     FROREIGN KEY(student) REFERENCES teacher(serial)
+                                                         ON DELETE SET NULL
+                                                         );
+                                         delete: DELETE FROM teacher          [parent cls theke foreign key delete kore dile child cls automatic delete hoye jabe]
+                                                      WHERE column_name = 'value text/';
+                                               
+                         iii:-ON DELETE ON ACTION:
+                                        syntex:-    iv equation equal
+                        iv:- ON DELETE RESTRICT:
+                                       syntex:-  Uporer tar moti hobe sodhu ON DELETE RESTRICT likthe hobe [ kono line delete kora jabe na]
+
+
+	ON UPDATE:                    [table korar shomoy update kore nile parent ke kono value change kore nothun valu bosale ta chile table change hobe]
+                                    i:-ON UPDATE CASECADE:
+                                         syntex:-  CREATE TABLE class
+                                                         (
+                                                         number  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                         subject  VARCHAR(30),
+                                                         salary  DECIMAL(9,2),
+	                                      student int not null
+		                    FROREIGN KEY(student) REFERENCES teacher(serial)
+                                                        ON UPDATE CASECADE
+                                                        );
+                                         update:-ON UPDATE CASECADE
+                                                       SET column_name1 = new_value
+                                                        WHERE column_name1 = value;
+
+
+                                   ii:-ON UPDATE SET NULL 
+			syntex:-  ii: equation equal [uporer on delete set null moto hobe]
+
+                                   iii:-ON UPDATE ON ACTION,    ON UPDATE RESTRICT:
+                                               syntex:- on delete r moto hobe
+
+                  NEW ADD:
+                          i:-kono ektai  table column_name ke mone holo je FOREIGN KEY banano lagbe tar jonno
+                                 ex:- ALTHER TABLE table_name
+                                        ADD CONSTAINT create_current_column_name
+                                         FOREIGN KEY (create_current_column_name) REFERENCES 1st_table_name(1st_table_column_name);
+                                     
+  
+                        ii:- kono ekti table nothun ektai column_name jukto korbo & foreign key shokare
+                                  ex:-  ALTHER TABLE table_name
+
+                                          ADD COLUMN new_column_name DATATYPE NOT NULL,
+                                          ADD CONSTAINT create_current_column_name
+                                         FOREIGN KEY (create_current_column_name) REFERENCES 1st_table_name(1st_table_column_name);
+
+
+
+
+                                              COMPOSITE KEY
+
+[primary key te same value deoa ace ekhon amar je kono ekjon ke data dekhano lagbe kinthu same name onake gulo ade thokon amra duiti column ke ek sath korbo]
+
+48.COMPOSITE KEY:        [dui column ke ek sathe kore primary key,unique key identifiy korthe pare]
+               syntex: CREATE TABLE table_name
+                             (
+                             column_name1 datatype(size), 
+                             column_name2 datatype(size), 
+                             column_name3 datatype(size), 
+	           column_name4 datatype(size), 
+                             column_name5 datatype(size),
+                            PRIMARY KEY(column_name1, column_name2)        [composite key]
+                            ); 
+
+
+		SHORTHAND NATATION
+
+[jokhon duiti table column_name ekai hoye jai thokon sql confused hoye jai asole parent table r column ke call kora hoyce naki child column ke call kora hoyce]
+49.SHORTHAND NATATION:
+                 syntex:- SELECT * FROM table_name1.column_name
+
+ 
+		HOW TO JOIN TABLES
+
+50.CROSS JOIN:                     [duiti tabler maje kono shomporko na thakleo amra cross join r maddhome kaj korthe parbo]
+                 syntex:- SELECT * FROM table_name1 CROSS JOIN table_name2;
+                
+                  or:- SELECT table1_name.column_name, table2_name.column_name FROM table1_name CROSS JOIN table2_name;
+
+                 
+                     
+
+			INNER JOIN
+51.i:-EQUIJOIN:
+             syntex:- SELECT column_name FROM table_name1
+                           INNER JOIN table_name2
+                           ON table1_column_name  =  table2_column_name;           [2ti table r  2ti column soman kina ta check kora]   
+
+    ii:-NON-EQUIJOIN<>:
+           syntex:-SELECT column_name FROM table_name1
+                         INNER JOIN table_name2
+                         ON table1_column_name <> table2_column_name;          [same value jegulo milbe oi gulo dekabe na. jegulo milbe na oi gulo display korbe]
+
+    iii:-NATURAL JOIN:
+           syntex:-SELECT column_name FROM table_name1
+                         NATURAL JOIN table_name2                                    [duiti column name ekai hote hobe]
+
+
+		OUTER JOIN
+52.LEFT OUTER JOIN:       [match korar por je gulor sathe mile nai oi khne null hobe]
+    i:-syntex:-   SELECT column_name FROM table_name1      [table_name1 = left table]
+                         LEFT JOIN table_name2                                       [table_name2 =right table]
+                         ON table1_column_name = table2_column_name;
+
+   ii:-RIGHT OUTER JOIN:
+              syntex:- SELECT column_name FROM table_name1  [table_name1 = right table]
+                            RIGHT JOIN table_name2                                   [table_name2 =left table]
+                           ON table1_column_name  =  table2_column_name;
+
+
+		SELF JOIN
+
+[employee record sobari thakbe kinthu ke kar boos ta janar jonno self join]
+ekai table tar serial no deye jodi main id identifiy kori ta hole table onujai. ]
+
+[new table dekabe ebong ke kar boss tao dkeabe] 
+
+EX:-table (sonam -> rahul 3,joy 3    Boss)
+[id ,    name,     minid] 
+[ 1,    Rahul,         3     ] ->sonam boss
+[ 2,     Jay,            3     ] ->sonam boss
+[ 3,    Sonam,       4     ] ->sonam r boss kunal
+[ 4,    Kunal,        5     ]  ->kunal r boss ram
+[ 5,    Ram,           6     ]  -> ram r boss rani
+[ 6,    Rani,      NULL ] ->rani woner
+[ 7,    Veeru,         6     ] ->veeru r boss rani
+
+syntex:- SELECT e.table1_column_name   Name, m.table1_column_name    Manager         [Alliash kora hoyce]
+              FROM table_name AS e
+              INNER JOIN table_name AS m
+              ON  e.table1_column_name =  m.table1_column_name;
+
+
+
+
+--->>Replacing Null           [null dekale valo dekhai na tai company woner name deoa hoyce]
+        SELECT e.name Name. IFNULL(m.name, 'Woner') AS Manger
+        FROM table_name AS e
+        LEFT JOIN table_name AS m
+        ON  e.table1_column_name =  m.table1_column_name;
